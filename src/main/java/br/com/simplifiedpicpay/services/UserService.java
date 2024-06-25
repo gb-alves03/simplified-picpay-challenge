@@ -36,19 +36,21 @@ public class UserService {
     }
 
     public User createUser(UserDtoRequest userDtoRequest) {
-        User user = mapper.convertToUserEntity(userDtoRequest);
-        return repository.save(user);
+        User user = new User(userDtoRequest);
+        this.saveUser(user);
+
+        return user;
     }
 
-    public Optional<User> findUserById(UUID id) {
-        return Optional.ofNullable(repository.findUserById(id).orElseThrow(() -> new UserNotFoundException("User not found")));
-    }
-
-    public Optional<User> findUserByDocument(String document) {
-        return Optional.ofNullable(repository.findUserByDocument(document).orElseThrow(() -> new UserNotFoundException("User not found")));
+    public User findUserById(UUID id) {
+        return repository.findUserById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
     public List<User> findAllUsers() {
         return repository.findAll();
+    }
+
+    public void saveUser(User user) {
+        repository.save(user);
     }
 }
