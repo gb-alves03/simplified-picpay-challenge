@@ -7,8 +7,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "transactions")
-@Table(name = "Transaction")
+@Entity(name = "Transaction")
+@Table(name = "transactions")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,7 +21,7 @@ public class Transaction {
     private Long id;
     private BigDecimal amount;
     @ManyToOne
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(name = "payer_id")
     private User sender;
     @ManyToOne
     @JoinColumn(name = "receiver_id")
