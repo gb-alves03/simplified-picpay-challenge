@@ -5,5 +5,7 @@ create table users(
     email varchar(255) not null,
     password varchar(255) not null,
     balance decimal not null,
-    user_type varchar(100) not null
+    user_type varchar(100) not null,
+
+    unique(document, email)
 );
