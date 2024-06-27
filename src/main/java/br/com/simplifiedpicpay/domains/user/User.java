@@ -1,5 +1,6 @@
 package br.com.simplifiedpicpay.domains.user;
 
+import br.com.simplifiedpicpay.dtos.UserDtoRequest;
 import br.com.simplifiedpicpay.enums.UserType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +19,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "uuid")
     private UUID id;
     private String name;
     @Column(unique = true)
@@ -31,4 +31,12 @@ public class User {
     private UserType userType;
 
 
+    public User (UserDtoRequest userDto) {
+     this.name = userDto.firstName() + " " + userDto.lastName();
+     this.balance = userDto.balance();
+     this.document = userDto.document();
+     this.email = userDto.email();
+     this.password = userDto.password();
+     this.userType =  userDto.userType();
+    }
 }

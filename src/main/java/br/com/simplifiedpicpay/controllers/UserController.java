@@ -32,11 +32,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") @RequestBody UUID id) {
-
-        var optionalUser = service.findUserById(id);
-
-        return optionalUser.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        User user = service.findUserById(id);
+        return ResponseEntity.ok().body(user);
     }
 
 }

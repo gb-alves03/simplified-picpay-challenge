@@ -5,6 +5,7 @@ import br.com.simplifiedpicpay.dtos.UserDtoRequest;
 import br.com.simplifiedpicpay.enums.UserType;
 import br.com.simplifiedpicpay.infra.exceptions.InsufficientBalanceException;
 import br.com.simplifiedpicpay.infra.exceptions.UnauthorizedUserException;
+import br.com.simplifiedpicpay.infra.exceptions.UserAlreadyExistsException;
 import br.com.simplifiedpicpay.infra.exceptions.UserNotFoundException;
 import br.com.simplifiedpicpay.mapper.UserMapper;
 import br.com.simplifiedpicpay.repository.UserRepository;
@@ -36,19 +37,27 @@ public class UserService {
     }
 
     public User createUser(UserDtoRequest userDtoRequest) {
-        User user = mapper.convertToUserEntity(userDtoRequest);
-        return repository.save(user);
+        var userDb = repository.findUserByDocumentOrEmail(userDtoRequest.document(), userDtoRequest.email());
+
+        if (userDb.isPresent()) {
+            throw new UserAlreadyExistsException("Already exists an user with this document or email");
+        }
+
+        User user = new User(userDtoRequest);
+        this.saveUser(user);
+
+        return user;
     }
 
-    public Optional<User> findUserById(UUID id) {
-        return Optional.ofNullable(repository.findUserById(id).orElseThrow(() -> new UserNotFoundException("User not found")));
-    }
-
-    public Optional<User> findUserByDocument(String document) {
-        return Optional.ofNullable(repository.findUserByDocument(document).orElseThrow(() -> new UserNotFoundException("User not found")));
+    public User findUserById(UUID id) {
+        return repository.findUserById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
     public List<User> findAllUsers() {
         return repository.findAll();
+    }
+
+    public void saveUser(User user) {
+        repository.save(user);
     }
 }
