@@ -1,6 +1,6 @@
 package br.com.simplifiedpicpay.dtos;
 
-import br.com.simplifiedpicpay.enums.UserType;
+import br.com.simplifiedpicpay.enums.WalletType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +23,6 @@ public record UserDtoRequest(
         @NotNull
         BigDecimal balance,
         @NotNull
-        UserType userType
+        WalletType walletType
 ) {
 }
