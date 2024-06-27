@@ -5,6 +5,7 @@ import br.com.simplifiedpicpay.dtos.UserDtoRequest;
 import br.com.simplifiedpicpay.enums.UserType;
 import br.com.simplifiedpicpay.infra.exceptions.InsufficientBalanceException;
 import br.com.simplifiedpicpay.infra.exceptions.UnauthorizedUserException;
+import br.com.simplifiedpicpay.infra.exceptions.UserAlreadyExistsException;
 import br.com.simplifiedpicpay.infra.exceptions.UserNotFoundException;
 import br.com.simplifiedpicpay.mapper.UserMapper;
 import br.com.simplifiedpicpay.repository.UserRepository;
@@ -36,6 +37,12 @@ public class UserService {
     }
 
     public User createUser(UserDtoRequest userDtoRequest) {
+        var userDb = repository.findUserByDocumentOrEmail(userDtoRequest.document(), userDtoRequest.email());
+
+        if (userDb.isPresent()) {
+            throw new UserAlreadyExistsException("Already exists an user with this document or email");
+        }
+
         User user = new User(userDtoRequest);
         this.saveUser(user);
 
