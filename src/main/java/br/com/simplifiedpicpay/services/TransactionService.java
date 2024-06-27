@@ -4,7 +4,7 @@ import br.com.simplifiedpicpay.domains.transaction.Transaction;
 import br.com.simplifiedpicpay.domains.user.User;
 import br.com.simplifiedpicpay.dtos.TransactionDtoRequest;
 import br.com.simplifiedpicpay.infra.exceptions.UnauthorizedTransactionException;
-import br.com.simplifiedpicpay.infra.utils.ApiResponse;
+import br.com.simplifiedpicpay.services.utils.ApiResponse;
 import br.com.simplifiedpicpay.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

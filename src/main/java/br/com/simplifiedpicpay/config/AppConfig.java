@@ -1,4 +1,4 @@
-package br.com.simplifiedpicpay.infra.utils;
+package br.com.simplifiedpicpay.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

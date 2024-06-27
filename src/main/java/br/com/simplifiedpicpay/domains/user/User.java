@@ -1,7 +1,7 @@
 package br.com.simplifiedpicpay.domains.user;
 
 import br.com.simplifiedpicpay.dtos.UserDtoRequest;
-import br.com.simplifiedpicpay.enums.UserType;
+import br.com.simplifiedpicpay.enums.WalletType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,7 +28,7 @@ public class User {
     private String password;
     private BigDecimal balance;
     @Enumerated(EnumType.STRING)
-    private UserType userType;
+    private WalletType walletType;
 
 
     public User (UserDtoRequest userDto) {
@@ -37,6 +37,6 @@ public class User {
      this.document = userDto.document();
      this.email = userDto.email();
      this.password = userDto.password();
-     this.userType =  userDto.userType();
+     this.walletType =  userDto.walletType();
     }
 }
