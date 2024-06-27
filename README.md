@@ -18,16 +18,32 @@ Some specific technologies that also were used:
 > Sending notifications when carrying out transactions using an external service <br>
 
 ## Project Structure
-> Controllers <br>
-> Domains <br>
-> DTOs <br>
-> Enums <br>
-> Infra <br>
-> Exceptions <br>
-> Utils <br>
-> Mapper <br>
-> Repository <br>
-> Services <br>
+````css
+simplified-picpay-challenge
+│ README.md
+│ pom.xml
+| docker-compose.yaml
+| .gitignore
+└───src
+│    └───main
+│          └───java
+│                └───br
+│                    └───com
+│                         └───simplifiedpicpay
+│                                     │ SimplifiedpicpayApplication.java
+│                                     └───controllers
+│                                     └───domains
+│                                            └───transaction
+│                                            └───user
+│                                     └───dtos
+│                                     └───enums
+│                                     └───infra
+│                                           └───domains
+│                                           └───utils
+│                                     └───mapper
+│                                     └───repository
+│                                     └───services
+````
 
 ### Requirements
 
