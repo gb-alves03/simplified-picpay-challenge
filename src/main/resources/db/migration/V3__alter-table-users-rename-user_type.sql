@@ -1,0 +1,1 @@
+alter table users rename user_type to wallet_type;
