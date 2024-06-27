@@ -1,4 +1,4 @@
-package br.com.simplifiedpicpay.infra.utils;
+package br.com.simplifiedpicpay.services.utils;
 
 public class DataResponse {
 

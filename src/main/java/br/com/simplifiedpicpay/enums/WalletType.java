@@ -1,6 +1,6 @@
 package br.com.simplifiedpicpay.enums;
 
-public enum UserType {
+public enum WalletType {
     COMMON,
     MERCHANT
 }
