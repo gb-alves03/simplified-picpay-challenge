@@ -2,7 +2,7 @@
 PicPay Simplified is a simplified payment platform. Here you can deposit and transfer money between users. We have 2 types of users, ordinary users and merchants, both of whom have a wallet with money and make transfers between them. This is a Restful API, as requested in the challenge objective.
 
 ## Used Technologies
-[![Used Technologies](https://skillicons.dev/icons?i=java,spring,maven,docker,postgres)](https://skillicons.dev) 
+[![Used Technologies](https://skillicons.dev/icons?i=java,spring,maven,docker,postgres,rabbitmq,postman)](https://skillicons.dev) 
 
 Some specific technologies that also were used:
 > Spring Data JPA <br>
@@ -10,12 +10,13 @@ Some specific technologies that also were used:
 > Docker Compose <br>
 > PostgreSQL (Docker Container) <br>
 > Hibernate Validator <br>
-> RestTemplate
+> RestTemplate <br>
+> RabbitMQ <br>
 
 ## Features
 > Registering COMMON and MERCHANT Wallets <br>
 > Carry out transactions from a COMMON Wallet to a MERCHANT Wallet <br>
-> Sending notifications when carrying out transactions using an external service <br>
+> Sending notifications when carrying out transactions using an PicPay external service <br>
 
 ## Project Structure
 ````css
@@ -31,6 +32,7 @@ simplified-picpay-challenge
 │                    └───com
 │                         └───simplifiedpicpay
 │                                     │ SimplifiedpicpayApplication.java
+│                                     └───config
 │                                     └───controllers
 │                                     └───domains
 │                                            └───transaction
@@ -38,9 +40,8 @@ simplified-picpay-challenge
 │                                     └───dtos
 │                                     └───enums
 │                                     └───infra
-│                                           └───domains
-│                                           └───utils
-│                                     └───mapper
+│                                           └───exceptions
+│                                           └───security
 │                                     └───repository
 │                                     └───services
 ````
@@ -73,4 +74,5 @@ simplified-picpay-challenge
 
 
 ## Project Architecture
-![image](https://github.com/gb-alves03/simplified-picpay-challenge/assets/100585280/09886210-0bb1-4697-9452-de3bec0a89d3)
+![image](https://github.com/gb-alves03/simplified-picpay-challenge/assets/100585280/5d4555db-d09f-4dbb-b85a-a973cb16519f)
+
