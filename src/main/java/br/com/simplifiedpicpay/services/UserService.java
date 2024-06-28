@@ -9,11 +9,12 @@ import br.com.simplifiedpicpay.infra.exceptions.UserAlreadyExistsException;
 import br.com.simplifiedpicpay.infra.exceptions.UserNotFoundException;
 import br.com.simplifiedpicpay.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -55,8 +56,8 @@ public class UserService {
         return repository.findUserById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
-    public List<User> findAllUsers() {
-        return repository.findAll();
+    public Page<User> findAllUsers(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public void saveUser(User user) {
