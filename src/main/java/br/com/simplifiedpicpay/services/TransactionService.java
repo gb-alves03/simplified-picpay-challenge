@@ -3,6 +3,7 @@ package br.com.simplifiedpicpay.services;
 import br.com.simplifiedpicpay.domains.transaction.Transaction;
 import br.com.simplifiedpicpay.domains.user.User;
 import br.com.simplifiedpicpay.dtos.TransactionDtoRequest;
+import br.com.simplifiedpicpay.enums.WalletType;
 import br.com.simplifiedpicpay.infra.exceptions.UnauthorizedTransactionException;
 import br.com.simplifiedpicpay.services.utils.ApiResponse;
 import br.com.simplifiedpicpay.repository.TransactionRepository;
@@ -33,6 +34,8 @@ public class TransactionService {
     public Transaction createTransaction(TransactionDtoRequest transactionDto) {
         User payer = userService.findUserById(transactionDto.payerId());
         User receiver = userService.findUserById(transactionDto.receiverId());
+
+        userService.validateTransaction(payer, transactionDto.amount());
 
         boolean isAuthorized = this.authorizeTransaction(payer, transactionDto.amount());
         if (!isAuthorized) {
