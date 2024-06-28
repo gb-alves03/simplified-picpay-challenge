@@ -4,10 +4,13 @@ import br.com.simplifiedpicpay.domains.transaction.Transaction;
 import br.com.simplifiedpicpay.domains.user.User;
 import br.com.simplifiedpicpay.dtos.TransactionDtoRequest;
 import br.com.simplifiedpicpay.enums.WalletType;
+import br.com.simplifiedpicpay.infra.exceptions.TransactionNotFoundException;
 import br.com.simplifiedpicpay.infra.exceptions.UnauthorizedTransactionException;
 import br.com.simplifiedpicpay.services.utils.ApiResponse;
 import br.com.simplifiedpicpay.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -77,5 +80,13 @@ public class TransactionService {
             }
         }
         return false;
+    }
+
+    public Page<Transaction> findAllTransactions(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public Transaction findTransactionById(Long id) {
+        return repository.findTransactionById(id).orElseThrow(() -> new TransactionNotFoundException("Transaction not found"));
     }
 }

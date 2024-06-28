@@ -1,8 +1,6 @@
 package br.com.simplifiedpicpay.controllers;
 
-import br.com.simplifiedpicpay.infra.exceptions.InsufficientBalanceException;
-import br.com.simplifiedpicpay.infra.exceptions.UnauthorizedUserException;
-import br.com.simplifiedpicpay.infra.exceptions.UserAlreadyExistsException;
+import br.com.simplifiedpicpay.infra.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,5 +28,15 @@ public class ControllerExceptionHandler {
     @ExceptionHandler
     public ResponseEntity threatAuthorizationFalse(HttpClientErrorException exception) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{\"status\" : \"fail\", \"data\" : { \"authorization\" : false }}\"");
+    }
+
+    @ExceptionHandler
+    public ResponseEntity threatTransactionNotFound(TransactionNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Transaction not found");
+    }
+
+    @ExceptionHandler
+    public ResponseEntity threatUserNotFound(UserNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
     }
 }
