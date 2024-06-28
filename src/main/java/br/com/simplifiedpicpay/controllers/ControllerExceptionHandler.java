@@ -14,7 +14,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity threatUnauthorizedUser(UnauthorizedUserException exception) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authorized");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authorized to realize the transaction");
     }
 
     @ExceptionHandler
